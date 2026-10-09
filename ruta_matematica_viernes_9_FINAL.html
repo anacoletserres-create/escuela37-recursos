@@ -1,0 +1,253 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MATEMÁTICA · RUTA COMPLETA · VIERNES 9</title><style>:root{--area-bg:#f2f8f5;--area-ink:#245a52}
+:root{
+  --card:#ffffff; --page:#f6f7f5; --border:#d9ded8; --text:#253025; --muted:#727a72;
+  --ok:#e8f5e9; --soft:#f7faf7;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--page);color:var(--text)}
+.app{max-width:980px;margin:auto;padding:18px}
+.hero,.panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:16px}
+.hero{background:var(--area-bg)}
+.row{display:flex;gap:14px;justify-content:space-between;align-items:flex-end;flex-wrap:wrap}
+.controls,.actions,.help-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+select,button,textarea{font:inherit}
+select,button{min-height:44px;border-radius:12px}
+select{border:1px solid var(--border);background:#fff;padding:8px}
+button{cursor:pointer}
+.primary{border:0;background:var(--area-ink);color:white;padding:9px 15px;font-weight:900}
+.secondary{border:1px solid var(--border);background:#fff;padding:9px 14px;font-weight:800}
+.stephead{display:flex;gap:12px;align-items:flex-start}
+.step{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--area-ink);color:white;font-weight:900;flex:0 0 auto}
+.flex1{flex:1;min-width:0}
+.hidden{display:none!important}
+.stars{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.star{font-size:34px;filter:grayscale(1);opacity:.25}.star.on{filter:none;opacity:1}
+.task{border:1px solid var(--border);border-radius:16px;padding:14px;background:#fff;margin-top:12px}
+.task.done{background:var(--ok)}
+.feedback{min-height:26px;margin-top:8px;font-weight:900}
+.helper{margin-top:8px;padding:10px;border-left:5px solid var(--area-ink);border-radius:9px;background:var(--soft)}
+.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin-top:12px}
+.option{border:2px solid var(--border);background:#fff;border-radius:15px;min-height:92px;padding:10px;font-weight:900;text-align:center}
+.option[aria-pressed="true"]{border-color:var(--area-ink);background:var(--area-bg)}
+.token-bank,.slot{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.token{border:2px solid var(--border);background:#fff;border-radius:13px;min-height:58px;padding:10px 12px;font-weight:900}
+.slot{min-height:76px;border:2px dashed var(--border);border-radius:14px;padding:9px;background:var(--soft)}
+.example{border:1px solid var(--border);border-radius:14px;background:#fff;padding:12px;margin-top:9px}
+.learn-grid{display:grid;gap:8px}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px}
+.meta-btn{border:2px solid var(--border);background:#fff;border-radius:15px;min-height:105px;padding:9px;font-weight:900}
+.meta-btn[aria-pressed="true"]{border-color:var(--area-ink);background:var(--area-bg)}
+.meta-btn .big{display:block;font-size:42px;margin-bottom:5px}
+.help-btn[aria-pressed="true"]{border:3px solid var(--area-ink);background:var(--area-bg)}
+.help-btn[aria-pressed="true"]::before{content:"✓ ";font-weight:1000}
+.route-upper .route-text{text-transform:uppercase}
+.route-normal .route-text{text-transform:none}
+.small{font-size:13px}.bold{font-weight:900}.muted{color:var(--muted)}
+textarea{width:100%;min-height:120px;border:2px solid var(--border);border-radius:13px;padding:10px;margin-top:10px;background:#fff}
+.checklist{display:grid;gap:7px;margin-top:10px}.checkline{display:flex;align-items:flex-start;gap:8px;text-transform:none}
+.checkline input{width:22px;height:22px;flex:0 0 auto}
+.obj-zone{border:2px dashed var(--border);border-radius:15px;min-height:115px;padding:10px;margin-top:10px}
+.basket{border-left:7px solid #8a5b2b;border-right:7px solid #8a5b2b;border-bottom:7px solid #8a5b2b;border-radius:0 0 20px 20px;min-height:150px;padding:18px 10px 10px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-content:flex-end;background:#fffaf2;margin-top:10px}
+.obj{font-size:50px;border:0;background:transparent;min-width:68px;min-height:68px}
+.num-bank{display:grid;grid-template-columns:repeat(5,minmax(50px,1fr));gap:7px;max-width:430px;margin-top:10px}
+.digit{border:2px solid var(--border);background:#fff;border-radius:11px;min-height:52px;font-size:23px;font-weight:900}
+.digit.selected{border-color:var(--area-ink);background:var(--area-bg)}
+.pos-grid{display:grid;gap:5px;max-width:630px;margin-top:12px}
+.cell{border:1px solid var(--border);border-radius:9px;min-height:54px;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:900;background:#fff}
+.cell.head{font-size:13px;min-height:38px}.cell.editable{border:2px dashed var(--area-ink)}.cell.editable.active{outline:3px solid var(--area-ink);outline-offset:2px}
+.signrow{display:flex;gap:13px;align-items:center;justify-content:center;flex-wrap:wrap;font-weight:900;font-size:30px;margin:12px 0}.sign{font-size:50px;color:var(--area-ink)}
+.visual{width:150px;height:96px;max-width:100%;margin:auto}.visual svg{width:100%;height:100%;overflow:visible}
+.sunfill{fill:#F6C945}.earthfill{fill:#4B88D1}.landfill{fill:#69A96B}.moonfill{fill:#A9ADB3}.darkfill{fill:#343A40}
+.astroline{stroke:var(--text);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}.accentline{stroke:var(--area-ink);stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:460px){.app{padding:10px}.option{min-height:105px}}
+</style></head><body>
+<div class="app route-upper">
+<section class="hero"><div class="row"><div><div class="bold" style="color:var(--area-ink)">MATEMÁTICA · RUTA COMPLETA · VIERNES 9</div><div class="small route-text">UNA ACTIVIDAD CORRECTA ABRE LA SIGUIENTE. PODÉS VOLVER A MIRAR TODO LO ANTERIOR.</div></div><div class="controls"><label class="small bold">ALUMNO/A<br><select id="student"><option value="paulina">PAULINA · INICIAL 5</option>
+<option value="ismael">ISMAEL · 1.º</option>
+<option value="geronimo">GERÓNIMO · 2.º</option>
+<option value="spencer">SPENCER · 3.º</option>
+<option value="santino">SANTINO · 5.º A</option>
+<option value="novak">NOVAK · 5.º B</option></select></label><button id="reset" class="secondary">REINICIAR</button></div></div><div id="goal" class="bold route-text" style="margin-top:12px"></div><div class="stars"><b>MIS ESTRELLAS:</b><span class="star" data-s="1">⭐</span><span class="star" data-s="2">⭐</span><span class="star" data-s="3">⭐</span><span class="star" data-s="4">⭐</span><b id="prog">0 DE 4</b></div></section>
+<section class="panel"><div class="stephead"><span class="step">1</span><div class="flex1"><div class="bold" style="color:var(--area-ink)">PRIMERO: PRUEBO</div><div class="small route-text">RESOLVÉ VARIAS ACTIVIDADES. CUANDO UNA ESTÁ BIEN, APARECE LA SIGUIENTE.</div><div id="practice"></div></div></div></section>
+<section id="step2" class="panel hidden"><div class="stephead"><span class="step">2</span><div class="flex1"><div class="bold" style="color:var(--area-ink)">SEGUNDO: APRENDO</div><div id="learn" class="learn-grid"></div><div class="bold route-text" style="margin-top:18px">MICROCOMPROBACIÓN</div><div id="learnCheck"></div></div></div></section>
+<section id="step3" class="panel hidden"><div class="stephead"><span class="step">3</span><div class="flex1"><div class="bold" style="color:var(--area-ink)">TERCERO: AHORA LO HAGO YO</div><div class="small route-text">AHORA CAMBIA EL CONTENIDO, PERO NO CAMBIA LA FORMA DE TRABAJAR.</div><div id="activity"></div></div></div></section>
+<section id="step4" class="panel hidden"><div class="stephead"><span class="step">4</span><div class="flex1"><div class="bold" style="color:var(--area-ink)">CUARTO: ¿CÓMO LO HICE?</div><div id="meta"></div><button id="finish" class="primary" style="margin-top:14px">⭐ TERMINÉ</button><div id="final" class="feedback"></div></div></div></section>
+</div><script id="route-data" type="application/json">{"routes": {"paulina": {"case": "upper", "goal": "VOY A JUNTAR O SACAR OBJETOS Y DESPUÉS CONTAR CUÁNTOS HAY.", "practice": [{"type": "manip", "prompt": "HAY 2 MANZANAS EN LA CESTA. TOCÁ 1 MANZANA DE AFUERA PARA JUNTARLA.", "mode": "add", "start": 2, "move": 1, "icon": "🍎", "answer": 3, "hint": "TENÉS QUE JUNTAR UNA.", "deep": "MIRÁ CUÁNTAS ESTÁN AFUERA Y TOCÁ SOLO UNA.", "example": "2 OBJETOS Y 1 OBJETO JUNTOS FORMAN 3."}, {"type": "manip", "prompt": "HAY 1 FLOR. TOCÁ 2 FLORES PARA JUNTARLAS.", "mode": "add", "start": 1, "move": 2, "icon": "🌸", "answer": 3, "hint": "TENÉS QUE JUNTAR DOS.", "deep": "TOCÁ DOS FLORES DE AFUERA.", "example": "1 FLOR Y 2 FLORES JUNTAS FORMAN 3."}, {"type": "manip", "prompt": "HAY 4 OSOS. TOCÁ 1 PARA SACARLO.", "mode": "remove", "start": 4, "move": 1, "icon": "🧸", "answer": 3, "hint": "TENÉS QUE SACAR UNO.", "deep": "TOCÁ UN OSO DE ADENTRO.", "example": "SI HAY 4 Y SACAMOS 1, QUEDAN 3."}, {"type": "manip", "prompt": "HAY 2 PELOTAS. TOCÁ 2 MÁS PARA JUNTARLAS.", "mode": "add", "start": 2, "move": 2, "icon": "⚽", "answer": 4, "hint": "JUNTÁ DOS.", "deep": "TOCÁ DOS PELOTAS DE AFUERA.", "example": "2 Y 2 JUNTAS FORMAN 4."}, {"type": "manip", "prompt": "HAY 5 FRUTILLAS. TOCÁ 2 PARA SACARLAS.", "mode": "remove", "start": 5, "move": 2, "icon": "🍓", "answer": 3, "hint": "SACÁ DOS.", "deep": "TOCÁ DOS FRUTILLAS DE ADENTRO.", "example": "SI SACAMOS 2 DE 5, QUEDAN 3."}], "learn": [{"title": "JUNTAR", "text": "PONEMOS OBJETOS EN EL MISMO GRUPO Y VOLVEMOS A CONTAR."}, {"title": "EJEMPLO", "text": "🍏 🍏 Y 🍏 → JUNTAMOS → 🍏 🍏 🍏 → HAY 3."}, {"title": "SACAR", "text": "QUITAMOS OBJETOS DEL GRUPO Y VOLVEMOS A CONTAR."}, {"title": "EJEMPLO", "text": "🐟 🐟 🐟 🐟 → SACAMOS UNO → 🐟 🐟 🐟 → QUEDAN 3."}], "learnCheck": {"type": "manip", "prompt": "HAY 2 ESTRELLAS. JUNTÁ 1 MÁS Y DESPUÉS CONTÁ.", "mode": "add", "start": 2, "move": 1, "icon": "⭐", "answer": 3, "hint": "JUNTÁ UNA ESTRELLA.", "deep": "TOCÁ LA ESTRELLA DE AFUERA.", "example": "2 Y 1 JUNTAS FORMAN 3."}, "activity": [{"type": "manip", "prompt": "HAY 3 VAQUITAS. JUNTÁ 1 MÁS.", "mode": "add", "start": 3, "move": 1, "icon": "🐞", "answer": 4, "hint": "JUNTÁ UNA.", "deep": "TOCÁ UNA DE AFUERA.", "example": "3 Y 1 FORMAN 4."}, {"type": "manip", "prompt": "HAY 4 FLORES. SACÁ 2.", "mode": "remove", "start": 4, "move": 2, "icon": "🌼", "answer": 2, "hint": "SACÁ DOS.", "deep": "TOCÁ DOS DE ADENTRO.", "example": "DE 4 SACAMOS 2 Y QUEDAN 2."}, {"type": "manip", "prompt": "HAY 2 PIEZAS. JUNTÁ 3 MÁS.", "mode": "add", "start": 2, "move": 3, "icon": "🧩", "answer": 5, "hint": "JUNTÁ TRES.", "deep": "CONTÁ CUÁNTAS TOCASTE.", "example": "2 Y 3 JUNTAS FORMAN 5."}, {"type": "manip", "prompt": "HAY 5 NARANJAS. SACÁ 1.", "mode": "remove", "start": 5, "move": 1, "icon": "🍊", "answer": 4, "hint": "SACÁ UNA.", "deep": "TOCÁ UNA DE ADENTRO.", "example": "QUEDAN 4."}, {"type": "manip", "prompt": "HAY 1 AUTO. JUNTÁ 4 MÁS.", "mode": "add", "start": 1, "move": 4, "icon": "🚗", "answer": 5, "hint": "JUNTÁ CUATRO.", "deep": "TOCÁ CUATRO AUTOS DE AFUERA.", "example": "1 Y 4 FORMAN 5."}], "meta": [["👀", "MIRÉ"], ["👆", "MOVÍ"], ["🧺", "JUNTÉ O SAQUÉ"], ["🔢", "CONTÉ"], ["✅", "COMPROBÉ"]], "final": ["MIRO CUÁNTOS HAY.", "JUNTO O SACO LOS OBJETOS.", "VUELVO A CONTAR.", "ELIJO EL NÚMERO.", "COMPRUEBO."]}, "ismael": {"case": "upper", "goal": "VOY A JUNTAR O SACAR OBJETOS, CONTAR Y REPRESENTAR LA CANTIDAD CON UN NÚMERO.", "practice": [{"type": "manip", "prompt": "HAY 3 FICHAS. TOCÁ 2 PARA JUNTARLAS.", "mode": "add", "start": 3, "move": 2, "icon": "🔵", "answer": 5, "hint": "JUNTÁ DOS.", "deep": "TOCÁ DOS FICHAS DE AFUERA.", "example": "3 Y 2 FORMAN 5."}, {"type": "manip", "prompt": "HAY 6 FICHAS. SACÁ 2.", "mode": "remove", "start": 6, "move": 2, "icon": "🟢", "answer": 4, "hint": "SACÁ DOS.", "deep": "TOCÁ DOS DE ADENTRO.", "example": "DE 6 SACAMOS 2 Y QUEDAN 4."}, {"type": "manip", "prompt": "HAY 4 FICHAS. JUNTÁ 3 MÁS.", "mode": "add", "start": 4, "move": 3, "icon": "🟡", "answer": 7, "hint": "JUNTÁ TRES.", "deep": "TOCÁ TRES DE AFUERA.", "example": "4 Y 3 FORMAN 7."}, {"type": "manip", "prompt": "HAY 7 ESTRELLAS. SACÁ 3.", "mode": "remove", "start": 7, "move": 3, "icon": "⭐", "answer": 4, "hint": "SACÁ TRES.", "deep": "TOCÁ TRES DE ADENTRO.", "example": "DE 7 SACAMOS 3 Y QUEDAN 4."}, {"type": "manip", "prompt": "HAY 5 MANZANAS. JUNTÁ 2 MÁS.", "mode": "add", "start": 5, "move": 2, "icon": "🍎", "answer": 7, "hint": "JUNTÁ DOS.", "deep": "TOCÁ DOS DE AFUERA.", "example": "5 Y 2 FORMAN 7."}], "learn": [{"title": "PRIMERO HACEMOS LA ACCIÓN", "text": "JUNTAMOS O SACAMOS OBJETOS."}, {"title": "DESPUÉS CONTAMOS", "text": "VOLVEMOS A CONTAR CUÁNTOS HAY."}, {"title": "AL FINAL REPRESENTAMOS", "text": "EL NÚMERO REPRESENTA LA CANTIDAD QUE QUEDÓ."}], "learnCheck": {"type": "manip", "prompt": "HAY 5 OSOS. SACÁ 2 Y REPRESENTÁ CUÁNTOS QUEDAN.", "mode": "remove", "start": 5, "move": 2, "icon": "🧸", "answer": 3, "hint": "SACÁ DOS.", "deep": "TOCÁ DOS OSOS DE ADENTRO.", "example": "5, SACAMOS 2, QUEDAN 3."}, "activity": [{"type": "manip", "prompt": "HAY 4 ESTRELLAS. JUNTÁ 2 MÁS.", "mode": "add", "start": 4, "move": 2, "icon": "🌟", "answer": 6, "hint": "JUNTÁ DOS.", "deep": "TOCÁ DOS DE AFUERA.", "example": "4 Y 2 FORMAN 6."}, {"type": "manip", "prompt": "HAY 8 FRUTILLAS. SACÁ 3.", "mode": "remove", "start": 8, "move": 3, "icon": "🍓", "answer": 5, "hint": "SACÁ TRES.", "deep": "TOCÁ TRES DE ADENTRO.", "example": "DE 8 SACAMOS 3 Y QUEDAN 5."}, {"type": "manip", "prompt": "HAY 5 PIEZAS. JUNTÁ 3 MÁS.", "mode": "add", "start": 5, "move": 3, "icon": "🧩", "answer": 8, "hint": "JUNTÁ TRES.", "deep": "TOCÁ TRES DE AFUERA.", "example": "5 Y 3 FORMAN 8."}, {"type": "manip", "prompt": "HAY 9 PELOTAS. SACÁ 4.", "mode": "remove", "start": 9, "move": 4, "icon": "⚽", "answer": 5, "hint": "SACÁ CUATRO.", "deep": "TOCÁ CUATRO DE ADENTRO.", "example": "DE 9 SACAMOS 4 Y QUEDAN 5."}, {"type": "manip", "prompt": "HAY 6 NARANJAS. JUNTÁ 3 MÁS.", "mode": "add", "start": 6, "move": 3, "icon": "🍊", "answer": 9, "hint": "JUNTÁ TRES.", "deep": "TOCÁ TRES DE AFUERA.", "example": "6 Y 3 FORMAN 9."}], "meta": [["👀", "MIRÉ"], ["👆", "MOVÍ"], ["🧺", "JUNTÉ O SAQUÉ"], ["🔢", "CONTÉ"], ["✋", "ELEGÍ EL NÚMERO"], ["✅", "COMPROBÉ"]], "final": ["MIRO LA CANTIDAD.", "HAGO LA ACCIÓN.", "CUENTO OTRA VEZ.", "REPRESENTO CON UN NÚMERO.", "COMPRUEBO."]}, "geronimo": {"case": "upper", "goal": "VOY A RESOLVER OPERACIONES DE DOS CIFRAS ORGANIZANDO DECENAS Y UNIDADES.", "practice": [{"type": "grid", "prompt": "RESOLVÉ 23 + 14.", "cols": ["D", "U"], "a": "23", "op": "+", "b": "14", "result": "37", "hint": "EMPEZÁ POR LAS UNIDADES.", "deep": "MIRÁ QUE CADA CIFRA ESTÉ EN SU COLUMNA.", "example": "12 + 25 = 37.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 42 + 16.", "cols": ["D", "U"], "a": "42", "op": "+", "b": "16", "result": "58", "hint": "UNIDADES CON UNIDADES.", "deep": "DESPUÉS TRABAJÁ CON LAS DECENAS.", "example": "31 + 27 = 58.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 67 − 25.", "cols": ["D", "U"], "a": "67", "op": "-", "b": "25", "result": "42", "hint": "RESTÁ UNIDADES Y DESPUÉS DECENAS.", "deep": "NO MEZCLES LAS COLUMNAS.", "example": "54 − 22 = 32.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 31 + 26.", "cols": ["D", "U"], "a": "31", "op": "+", "b": "26", "result": "57", "hint": "MIRÁ U Y D.", "deep": "EMPEZÁ POR U.", "example": "21 + 35 = 56.", "diagnostic": false, "bridge": false}], "learn": [{"title": "VALOR POSICIONAL", "text": "D = DECENAS. U = UNIDADES."}, {"title": "ORDEN", "text": "UNIDADES DEBAJO DE UNIDADES. DECENAS DEBAJO DE DECENAS."}, {"title": "EJEMPLO", "text": "23 + 14 = 37."}, {"title": "EJEMPLO", "text": "54 − 22 = 32."}], "learnCheck": {"type": "grid", "prompt": "COMPROBÁ LO APRENDIDO: 32 + 25.", "cols": ["D", "U"], "a": "32", "op": "+", "b": "25", "result": "57", "hint": "EMPEZÁ POR U.", "deep": "REVISÁ LA UBICACIÓN DE CADA CIFRA.", "example": "21 + 36 = 57.", "diagnostic": false, "bridge": false}, "activity": [{"type": "grid", "prompt": "RESOLVÉ 41 + 27.", "cols": ["D", "U"], "a": "41", "op": "+", "b": "27", "result": "68", "hint": "EMPEZÁ POR U.", "deep": "REVISÁ U Y D.", "example": "32 + 26 = 58.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 74 − 32.", "cols": ["D", "U"], "a": "74", "op": "-", "b": "32", "result": "42", "hint": "RESTÁ U Y DESPUÉS D.", "deep": "CADA CIFRA EN SU COLUMNA.", "example": "65 − 23 = 42.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 45 + 23.", "cols": ["D", "U"], "a": "45", "op": "+", "b": "23", "result": "68", "hint": "EMPEZÁ POR U.", "deep": "COMPROBÁ D Y U.", "example": "34 + 24 = 58.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 86 − 41.", "cols": ["D", "U"], "a": "86", "op": "-", "b": "41", "result": "45", "hint": "MIRÁ LAS UNIDADES.", "deep": "DESPUÉS LAS DECENAS.", "example": "75 − 32 = 43.", "diagnostic": false, "bridge": false}], "meta": [["👀", "MIRÉ LA OPERACIÓN"], ["🔢", "UBIQUÉ LAS CIFRAS"], ["1️⃣", "EMPECÉ POR UNIDADES"], ["🧮", "CALCULÉ"], ["✅", "COMPROBÉ"]], "final": ["IDENTIFICO LA OPERACIÓN.", "ORDENO DECENAS Y UNIDADES.", "CALCULO UNA COLUMNA POR VEZ.", "REVISO EL RESULTADO."]}, "spencer": {"case": "upper", "goal": "VOY A RESOLVER OPERACIONES DE TRES CIFRAS RESPETANDO CENTENAS, DECENAS Y UNIDADES Y COMPROBANDO EL RESULTADO.", "practice": [{"type": "grid", "prompt": "RESOLVÉ 234 + 123.", "cols": ["C", "D", "U"], "a": "234", "op": "+", "b": "123", "result": "357", "hint": "EMPEZÁ POR UNIDADES.", "deep": "REVISÁ C, D Y U.", "example": "312 + 145 = 457.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 462 + 215.", "cols": ["C", "D", "U"], "a": "462", "op": "+", "b": "215", "result": "677", "hint": "MANTENÉ LAS COLUMNAS.", "deep": "NO MEZCLES CENTENAS CON DECENAS.", "example": "351 + 224 = 575.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 685 − 243.", "cols": ["C", "D", "U"], "a": "685", "op": "-", "b": "243", "result": "442", "hint": "EMPEZÁ POR U.", "deep": "REVISÁ EL VALOR DE CADA CIFRA.", "example": "764 − 322 = 442.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 513 + 264.", "cols": ["C", "D", "U"], "a": "513", "op": "+", "b": "264", "result": "777", "hint": "PENSÁ SI EL RESULTADO DEBERÍA SUPERAR 700.", "deep": "CALCULÁ Y DESPUÉS COMPARÁ.", "example": "412 + 255 = 667.", "diagnostic": false, "bridge": false}], "learn": [{"title": "VALOR POSICIONAL", "text": "C = CENTENAS. D = DECENAS. U = UNIDADES."}, {"title": "ORDENAR", "text": "ORDENAR POR POSICIÓN EVITA MEZCLAR VALORES DIFERENTES."}, {"title": "EJEMPLO", "text": "234 + 123 = 357."}, {"title": "COMPROBAR", "text": "ANTES DE TERMINAR, PREGUNTATE SI EL RESULTADO ES RAZONABLE."}], "learnCheck": {"type": "grid", "prompt": "MICROCOMPROBACIÓN: 321 + 245.", "cols": ["C", "D", "U"], "a": "321", "op": "+", "b": "245", "result": "566", "hint": "EMPEZÁ POR U.", "deep": "REVISÁ C, D Y U.", "example": "210 + 356 = 566.", "diagnostic": false, "bridge": false}, "activity": [{"type": "grid", "prompt": "RESOLVÉ 321 + 456.", "cols": ["C", "D", "U"], "a": "321", "op": "+", "b": "456", "result": "777", "hint": "REVISÁ U, D Y C.", "deep": "COMPARÁ CON UNA ESTIMACIÓN.", "example": "300 + 400 YA SUPERA 700.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 894 − 352.", "cols": ["C", "D", "U"], "a": "894", "op": "-", "b": "352", "result": "542", "hint": "UNA COLUMNA POR VEZ.", "deep": "REVISÁ EL VALOR POSICIONAL.", "example": "785 − 243 = 542.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 413 + 265.", "cols": ["C", "D", "U"], "a": "413", "op": "+", "b": "265", "result": "678", "hint": "EMPEZÁ POR U.", "deep": "DESPUÉS D Y C.", "example": "312 + 266 = 578.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 765 − 324.", "cols": ["C", "D", "U"], "a": "765", "op": "-", "b": "324", "result": "441", "hint": "REVISÁ CADA COLUMNA.", "deep": "COMPROBÁ SI EL RESULTADO ES MENOR QUE 765.", "example": "654 − 213 = 441.", "diagnostic": false, "bridge": false}], "meta": [["👀", "MIRÉ LA OPERACIÓN"], ["🔢", "ORDENÉ C, D Y U"], ["🧮", "CALCULÉ"], ["🤔", "ESTIMÉ"], ["✅", "COMPROBÉ"]], "final": ["IDENTIFICO LA OPERACIÓN.", "ALINEO SEGÚN EL VALOR POSICIONAL.", "CALCULO.", "ESTIMO SI EL RESULTADO ES RAZONABLE.", "COMPRUEBO."]}, "santino": {"case": "upper", "goal": "VOY A ASEGURAR EL PROCEDIMIENTO CON TRES CIFRAS Y, SI LO DOMINO, AVANZAR A NÚMEROS DE CUATRO CIFRAS.", "practice": [{"type": "grid", "prompt": "PRIMERO: 235 + 142.", "cols": ["C", "D", "U"], "a": "235", "op": "+", "b": "142", "result": "377", "hint": "USÁ U, D Y C.", "deep": "EMPEZÁ COMO EN LA RUTA DE 3.º.", "example": "214 + 153 = 367.", "diagnostic": true, "bridge": false}, {"type": "grid", "prompt": "AHORA: 684 − 231.", "cols": ["C", "D", "U"], "a": "684", "op": "-", "b": "231", "result": "453", "hint": "UNA COLUMNA POR VEZ.", "deep": "REVISÁ U, D Y C.", "example": "573 − 221 = 352.", "diagnostic": true, "bridge": false}, {"type": "grid", "prompt": "ACTIVIDAD PUENTE: 312 + 265.", "cols": ["C", "D", "U"], "a": "312", "op": "+", "b": "265", "result": "577", "hint": "EMPEZÁ POR U.", "deep": "ASEGURÁ EL PROCEDIMIENTO ANTES DE AVANZAR.", "example": "411 + 166 = 577.", "diagnostic": false, "bridge": true}, {"type": "grid", "prompt": "AVANZAMOS: 1.245 + 230.", "cols": ["UM", "C", "D", "U"], "a": "1245", "op": "+", "b": "0230", "result": "1475", "hint": "230 TIENE 0 UM, 2 C, 3 D Y 0 U.", "deep": "ALINEÁ POR VALOR POSICIONAL.", "example": "1.320 + 245 = 1.565.", "diagnostic": false, "bridge": false}], "learn": [{"title": "MISMO PROCEDIMIENTO", "text": "AUNQUE APAREZCA UNA CIFRA MÁS, ALINEAMOS POR VALOR POSICIONAL."}, {"title": "UM", "text": "UM = UNIDAD DE MIL."}, {"title": "EJEMPLO", "text": "1.245 + 230 = 1.475."}, {"title": "IDEA CLAVE", "text": "SI APARECE UNA CIFRA NUEVA, AGREGAMOS UNA COLUMNA. NO CAMBIAMOS EL PROCEDIMIENTO."}], "learnCheck": {"type": "grid", "prompt": "MICROCOMPROBACIÓN: 1.120 + 345.", "cols": ["UM", "C", "D", "U"], "a": "1120", "op": "+", "b": "0345", "result": "1465", "hint": "ALINEÁ LAS CIFRAS.", "deep": "REVISÁ UM, C, D Y U.", "example": "1.210 + 255 = 1.465.", "diagnostic": false, "bridge": false}, "activity": [{"type": "grid", "prompt": "RESOLVÉ 312 + 265.", "cols": ["C", "D", "U"], "a": "312", "op": "+", "b": "265", "result": "577", "hint": "ASEGURÁ EL PROCEDIMIENTO.", "deep": "REVISÁ CADA COLUMNA.", "example": "411 + 166 = 577.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 756 − 324.", "cols": ["C", "D", "U"], "a": "756", "op": "-", "b": "324", "result": "432", "hint": "UNA COLUMNA POR VEZ.", "deep": "REVISÁ U, D Y C.", "example": "654 − 222 = 432.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "AHORA 1.320 + 245.", "cols": ["UM", "C", "D", "U"], "a": "1320", "op": "+", "b": "0245", "result": "1565", "hint": "MIRÁ DÓNDE VA CADA CIFRA.", "deep": "245 NO TIENE UM.", "example": "1.210 + 355 = 1.565.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 1.680 − 250.", "cols": ["UM", "C", "D", "U"], "a": "1680", "op": "-", "b": "0250", "result": "1430", "hint": "ALINEÁ POR VALOR POSICIONAL.", "deep": "REVISÁ CADA COLUMNA.", "example": "1.570 − 140 = 1.430.", "diagnostic": false, "bridge": false}], "meta": [["👀", "MIRÉ LA OPERACIÓN"], ["🔢", "ORDENÉ LAS CIFRAS"], ["🧮", "CALCULÉ"], ["⬆️", "AVANCÉ A NÚMEROS MAYORES"], ["✅", "COMPROBÉ"]], "final": ["ASEGURO EL PROCEDIMIENTO.", "ALINEO POR VALOR POSICIONAL.", "AGREGO UM CUANDO HACE FALTA.", "CALCULO.", "COMPRUEBO."]}, "novak": {"case": "upper", "goal": "VOY A RESOLVER OPERACIONES CON NÚMEROS NATURALES, ESTIMAR RESULTADOS Y JUSTIFICAR SI SON RAZONABLES.", "practice": [{"type": "grid", "prompt": "RESOLVÉ 1.408 + 275.", "cols": ["UM", "C", "D", "U"], "a": "1408", "op": "+", "b": "0275", "result": "1683", "hint": "ESTIMÁ ANTES.", "deep": "1.400 + 300 ESTÁ CERCA DE 1.700.", "example": "1.408 + 275 = 1.683.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 1.620 − 305.", "cols": ["UM", "C", "D", "U"], "a": "1620", "op": "-", "b": "0305", "result": "1315", "hint": "REVISÁ LA ALINEACIÓN.", "deep": "PENSÁ SI EL RESULTADO DEBE SER MAYOR O MENOR QUE 1.620.", "example": "1.620 − 305 = 1.315.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 2.315 + 462.", "cols": ["UM", "C", "D", "U"], "a": "2315", "op": "+", "b": "0462", "result": "2777", "hint": "COMPARÁ CON UNA ESTIMACIÓN.", "deep": "2.300 + 500 ≈ 2.800.", "example": "2.315 + 462 = 2.777.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 3.480 − 1.250.", "cols": ["UM", "C", "D", "U"], "a": "3480", "op": "-", "b": "1250", "result": "2230", "hint": "ESTIMÁ ANTES.", "deep": "3.500 − 1.300 ≈ 2.200.", "example": "3.480 − 1.250 = 2.230.", "diagnostic": false, "bridge": false}], "learn": [{"title": "1. ESTIMO", "text": "1.400 + 300 ≈ 1.700."}, {"title": "2. ALINEO", "text": "UM · C · D · U."}, {"title": "3. CALCULO", "text": "1.408 + 275 = 1.683."}, {"title": "4. COMPRUEBO", "text": "1.683 ESTÁ CERCA DE 1.700, POR LO TANTO EL RESULTADO ES RAZONABLE."}], "learnCheck": {"type": "choice", "prompt": "ANTES DE CALCULAR 2.140 + 536, ¿QUÉ ESTIMACIÓN ES MÁS RAZONABLE?", "options": [{"id": "0", "label": "CERCA DE 2.700"}, {"id": "1", "label": "CERCA DE 1.500"}, {"id": "2", "label": "CERCA DE 4.000"}], "correct": ["0"], "hint": "REDONDEÁ 2.140 Y 536.", "deep": "2.100 + 500 ≈ 2.600; 2.700 ES LA OPCIÓN MÁS CERCANA.", "example": "2.300 + 500 ≈ 2.800.", "multi": false, "diagnostic": false, "bridge": false}, "activity": [{"type": "grid", "prompt": "RESOLVÉ 2.140 + 536.", "cols": ["UM", "C", "D", "U"], "a": "2140", "op": "+", "b": "0536", "result": "2676", "hint": "ESTIMÁ ANTES.", "deep": "EL RESULTADO DEBE ESTAR CERCA DE 2.700.", "example": "2.140 + 536 = 2.676.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 3.480 − 1.250.", "cols": ["UM", "C", "D", "U"], "a": "3480", "op": "-", "b": "1250", "result": "2230", "hint": "CONTROLÁ CADA POSICIÓN.", "deep": "COMPARÁ CON 3.500 − 1.300.", "example": "RESULTADO APROXIMADO: 2.200.", "diagnostic": false, "bridge": false}, {"type": "grid", "prompt": "RESOLVÉ 4.205 + 673.", "cols": ["UM", "C", "D", "U"], "a": "4205", "op": "+", "b": "0673", "result": "4878", "hint": "ESTIMÁ ANTES.", "deep": "4.200 + 700 ≈ 4.900.", "example": "4.205 + 673 = 4.878.", "diagnostic": false, "bridge": false}, {"type": "choice", "prompt": "SI ESTIMASTE 4.900 Y OBTUVISTE 4.878, ¿QUÉ PODEMOS DECIR?", "options": [{"id": "0", "label": "EL RESULTADO ES RAZONABLE."}, {"id": "1", "label": "EL RESULTADO ES IMPOSIBLE."}, {"id": "2", "label": "LA ESTIMACIÓN NO SIRVE PARA COMPROBAR."}], "correct": ["0"], "hint": "COMPARÁ LOS DOS NÚMEROS.", "deep": "SON MUY CERCANOS.", "example": "UNA ESTIMACIÓN NO TIENE QUE SER EXACTA: SIRVE PARA CONTROLAR.", "multi": false, "diagnostic": false, "bridge": false}], "meta": [["👀", "IDENTIFIQUÉ LA OPERACIÓN"], ["🔢", "ALINEÉ LAS CIFRAS"], ["🤔", "ESTIMÉ"], ["🧮", "CALCULÉ"], ["⚖️", "COMPARÉ"], ["✅", "JUSTIFIQUÉ SI ERA RAZONABLE"]], "final": ["ESTIMO ANTES DE CALCULAR.", "ALINEO POR VALOR POSICIONAL.", "CALCULO.", "COMPARO CON LA ESTIMACIÓN.", "JUSTIFICO SI EL RESULTADO ES RAZONABLE."]}}}</script><script>(function(){
+function renderVisual(k){return ''}
+
+const APP = document.querySelector('.app');
+const DATA = JSON.parse(document.getElementById('route-data').textContent);
+const q=s=>APP.querySelector(s), qa=s=>[...APP.querySelectorAll(s)];
+let S={student:Object.keys(DATA.routes)[0], pi:0, ai:0, ps:{}, as:{}, ls:{}, stars:0, help:null, meta:new Set(), fast:true};
+
+function cfg(){return DATA.routes[S.student]}
+function setStars(n){S.stars=Math.max(S.stars,n);qa('.star').forEach(x=>x.classList.toggle('on',Number(x.dataset.s)<=S.stars));q('#prog').textContent=S.stars+' DE 4'}
+function norm(a){return [...a].sort().join('|')}
+function currentStore(kind){return kind==='p'?S.ps:kind==='a'?S.as:S.ls}
+function routeCase(){APP.classList.remove('route-upper','route-normal');APP.classList.add(cfg().case==='upper'?'route-upper':'route-normal')}
+function persistFeedback(state, fb){if(state.fb) fb.innerHTML=state.fb}
+function fail(t,state,fb){
+ state.w=(state.w||0)+1;
+ if(t.diagnostic) S.fast=false;
+ let msg='';
+ if(state.w===1) msg='↩️ TODAVÍA NO. VOLVÉ A MIRAR O LEER Y PROBÁ OTRA VEZ.';
+ else if(state.w===2) msg='🔎 PISTA: '+t.hint;
+ else if(state.w===3) msg='👀 '+t.deep+'<div class="helper"><b>EJEMPLO DEL MISMO TIPO:</b> '+(t.example||'VOLVÉ A MIRAR EL EJEMPLO RESUELTO.')+'</div>';
+ else msg='🧩 AYUDA MÁS CONCRETA: '+t.deep;
+ state.fb=msg; fb.innerHTML=msg;
+}
+function clearState(state){state.sel=[];state.chosen=[];state.text='';state.checks={};state.number=null;state.fb='';state.w=0;if(state.initLoc)state.loc=[...state.initLoc];}
+function eqChoice(task,state){return norm(state.sel||[])===norm(task.correct)}
+function complete(kind,index,state){
+ state.fb=''; 
+ if(kind==='p'){
+   S.pi++;
+   while(S.pi<cfg().practice.length && cfg().practice[S.pi].bridge && S.fast) S.pi++;
+   if(S.pi>=cfg().practice.length){setStars(1);q('#step2').classList.remove('hidden');renderLearn();setTimeout(()=>q('#step2').scrollIntoView({behavior:'smooth',block:'start'}),40)}
+ }else if(kind==='l'){
+   setStars(2);q('#step3').classList.remove('hidden');setTimeout(()=>q('#step3').scrollIntoView({behavior:'smooth',block:'start'}),40)
+ }else{
+   S.ai++;
+   if(S.ai>=cfg().activity.length){setStars(3);q('#step4').classList.remove('hidden');renderMeta();setTimeout(()=>q('#step4').scrollIntoView({behavior:'smooth',block:'start'}),40)}
+ }
+ render();
+}
+function optionButton(o, task, state){
+ const b=document.createElement('button'); b.type='button'; b.className='option';
+ b.dataset.correct=task.correct.includes(o.id)?'1':'0';
+ b.dataset.id=o.id; b.setAttribute('aria-pressed',String((state.sel||[]).includes(o.id)));
+ b.innerHTML=(o.visual?renderVisual(o.visual):'')+'<span>'+o.label+'</span>';
+ b.addEventListener('click',()=>{
+   if(task.multi){const i=state.sel.indexOf(o.id);if(i>=0)state.sel.splice(i,1);else state.sel.push(o.id)}
+   else state.sel=[o.id];
+   render(); // feedback persists because it is stored in state.fb
+ });
+ return b;
+}
+function renderChoice(task,state,card){
+ state.sel=state.sel||[];
+ const box=document.createElement('div');box.className='options';
+ task.options.forEach(o=>box.appendChild(optionButton(o,task,state)));card.appendChild(box);
+}
+function renderReorder(task,state,card){
+ state.chosen=state.chosen||[];
+ const bank=document.createElement('div');bank.className='token-bank';
+ task.tokens.filter(t=>!state.chosen.includes(t.id)).forEach(t=>{
+   const b=document.createElement('button');b.type='button';b.className='token';b.dataset.id=t.id;b.dataset.seq=String(task.correct.indexOf(t.id));b.textContent=(t.icon?t.icon+' ':'')+t.text;
+   b.addEventListener('click',()=>{state.chosen.push(t.id);render()});bank.appendChild(b)
+ });card.appendChild(bank);
+ const slot=document.createElement('div');slot.className='slot';
+ state.chosen.forEach(id=>{const t=task.tokens.find(x=>x.id===id);const b=document.createElement('button');b.type='button';b.className='token';b.dataset.id=id;b.textContent=(t.icon?t.icon+' ':'')+t.text;b.addEventListener('click',()=>{state.chosen.splice(state.chosen.indexOf(id),1);render()});slot.appendChild(b)});
+ if(!state.chosen.length){const m=document.createElement('span');m.className='muted small';m.textContent='TOCÁ UNA TARJETA Y BAJARÁ A ESTE RENGLÓN.';slot.appendChild(m)}
+ card.appendChild(slot);
+}
+function initManip(task,state){
+ if(state.loc)return;
+ const total=task.mode==='add'?task.start+task.move:task.start;
+ state.loc=[]; for(let i=0;i<total;i++)state.loc.push(task.mode==='add'&&i>=task.start?'out':'in');
+ state.initLoc=[...state.loc]; state.number=null;
+}
+function renderManip(task,state,card){
+ initManip(task,state);
+ const out=document.createElement('div');out.className='obj-zone';out.innerHTML='<b>'+ (task.mode==='add'?'OBJETOS DE AFUERA':'OBJETOS QUE SACASTE') +'</b>';
+ const basket=document.createElement('div');basket.className='basket';
+ state.loc.forEach((where,i)=>{
+   const b=document.createElement('button');b.type='button';b.className='obj';b.textContent=task.icon;b.dataset.index=i;
+   const isTarget = task.mode==='add' ? i>=task.start && i<task.start+task.move : i<task.move;
+   b.dataset.target=isTarget?'1':'0';
+   // REPARACIÓN: movimiento reversible en ambos sentidos.
+   b.addEventListener('click',()=>{state.loc[i]=state.loc[i]==='in'?'out':'in';render()});
+   (where==='in'?basket:out).appendChild(b);
+ });
+ card.appendChild(out);card.appendChild(basket);
+ const lab=document.createElement('div');lab.className='bold';lab.style.marginTop='10px';lab.textContent='¿CUÁNTOS HAY AHORA?';card.appendChild(lab);
+ const nb=document.createElement('div');nb.className='num-bank';
+ for(let i=0;i<=9;i++){const b=document.createElement('button');b.type='button';b.className='digit'+(Number(state.number)===i?' selected':'');b.dataset.value=String(i);b.textContent=i;b.addEventListener('click',()=>{state.number=i;render()});nb.appendChild(b)}
+ card.appendChild(nb);
+}
+function renderGrid(task,state,card){
+ const n=task.cols.length;
+ if(!state.cells){state.cells=Array(n).fill('');state.active=n-1} // REPARACIÓN: empieza en U, columna derecha.
+ const inst=document.createElement('div');inst.className='helper';inst.textContent='TOCÁ UNA CASILLA. DESPUÉS TOCÁ EL NÚMERO QUE QUERÉS ESCRIBIR. EMPEZÁ POR UNIDADES.';card.appendChild(inst);
+ const sr=document.createElement('div');sr.className='signrow';sr.innerHTML='<span>'+task.a+'</span><span class="sign">'+(task.op==='-'?'−':'+')+'</span><span>'+task.b+'</span><span class="sign">=</span><span>?</span>';card.appendChild(sr);
+ const g=document.createElement('div');g.className='pos-grid';g.style.gridTemplateColumns='58px repeat('+n+',minmax(48px,1fr))';
+ g.appendChild(document.createElement('div'));task.cols.forEach(c=>{const h=document.createElement('div');h.className='cell head';h.textContent=c;g.appendChild(h)});
+ const digits=x=>String(x).replace(/\D/g,'').padStart(n,' ').slice(-n).split('');
+ function row(l,val){const x=document.createElement('div');x.className='cell';x.textContent=l;g.appendChild(x);digits(val).forEach(d=>{const c=document.createElement('div');c.className='cell';c.textContent=d.trim();g.appendChild(c)})}
+ row('',task.a);row(task.op==='-'?'−':'+',task.b);
+ const eq=document.createElement('div');eq.className='cell';eq.textContent='=';g.appendChild(eq);
+ for(let i=0;i<n;i++){const b=document.createElement('button');b.type='button';b.className='cell editable'+(state.active===i?' active':'');b.dataset.col=task.cols[i];b.dataset.index=String(i);b.textContent=state.cells[i];b.addEventListener('click',()=>{state.active=i;render()});g.appendChild(b)}
+ card.appendChild(g);
+ const nb=document.createElement('div');nb.className='num-bank';
+ for(let d=0;d<=9;d++){const b=document.createElement('button');b.type='button';b.className='digit';b.dataset.value=String(d);b.textContent=d;b.addEventListener('click',()=>{state.cells[state.active]=String(d);if(state.active>0)state.active-=1;render()});nb.appendChild(b)}
+ card.appendChild(nb);
+}
+function renderProduction(task,state,card){
+ state.checks=state.checks||{};state.text=state.text||'';
+ const ta=document.createElement('textarea');ta.value=state.text;ta.placeholder=task.placeholder||'ESCRIBÍ AQUÍ...';ta.addEventListener('input',e=>{state.text=e.target.value});card.appendChild(ta);
+ const box=document.createElement('div');box.className='checklist';
+ (task.checklist||[]).forEach((label,i)=>{const line=document.createElement('label');line.className='checkline';const c=document.createElement('input');c.type='checkbox';c.checked=!!state.checks[i];c.dataset.check=String(i);c.addEventListener('change',()=>{state.checks[i]=c.checked});line.appendChild(c);const sp=document.createElement('span');sp.textContent=label;line.appendChild(sp);box.appendChild(line)});card.appendChild(box);
+ const note=document.createElement('div');note.className='helper';note.textContent='EL RECURSO NO DECIDE SI TU TEXTO ES “BUENO”. VOS LO RELEÉS Y MARCÁS LA LISTA DE AUTOCOMPROBACIÓN ANTES DE TERMINAR.';card.appendChild(note);
+}
+function isCorrect(task,state){
+ if(task.type==='choice')return eqChoice(task,state);
+ if(task.type==='reorder')return (state.chosen||[]).join('|')===task.correct.join('|');
+ if(task.type==='manip'){const inside=state.loc.filter(x=>x==='in').length;const moved=task.mode==='add'?state.loc.slice(task.start).filter(x=>x==='in').length:state.loc.slice(0,task.move).filter(x=>x==='out').length;return inside===task.answer&&moved===task.move&&Number(state.number)===task.answer}
+ if(task.type==='grid'){const got=(state.cells||[]).join('').replace(/^0+/,'')||'0';return got===String(task.result).replace(/^0+/,'')}
+ if(task.type==='production'){
+   const txt=(state.text||'').trim(); const words=txt.split(/\s+/).filter(Boolean).length; const sent=(txt.match(/[.!?]+/g)||[]).length;
+   const allChecks=(task.checklist||[]).every((_,i)=>state.checks&&state.checks[i]);
+   const connectorOK=!task.connectors||task.connectors.some(c=>txt.toLowerCase().includes(c));
+   return words>=task.minWords && sent>=task.minSentences && connectorOK && allChecks;
+ }
+ return false;
+}
+function taskCard(task,state,done,index,kind){
+ const card=document.createElement('div');card.className='task'+(done?' done':'');card.dataset.active=done?'0':'1';card.dataset.type=task.type;
+ card.innerHTML='<div class="bold">'+(kind==='l'?'COMPROBACIÓN':'ACTIVIDAD '+(index+1))+(done?' ✓':'')+'</div><div class="route-text" style="margin-top:4px;font-weight:700">'+task.prompt+'</div>';
+ if(done){card.innerHTML+='<div class="bold" style="margin-top:8px">⭐ SUPERADA</div>';return card}
+ if(task.type==='choice')renderChoice(task,state,card);
+ if(task.type==='reorder')renderReorder(task,state,card);
+ if(task.type==='manip')renderManip(task,state,card);
+ if(task.type==='grid')renderGrid(task,state,card);
+ if(task.type==='production')renderProduction(task,state,card);
+ const fb=document.createElement('div');fb.className='feedback';fb.setAttribute('aria-live','polite');persistFeedback(state,fb);card.appendChild(fb);
+ const actions=document.createElement('div');actions.className='actions';
+ const check=document.createElement('button');check.type='button';check.className='primary check-btn';check.textContent='COMPROBAR';check.addEventListener('click',()=>{if(isCorrect(task,state))complete(kind,index,state);else fail(task,state,fb)});actions.appendChild(check);
+ const reset=document.createElement('button');reset.type='button';reset.className='secondary reset-task';reset.textContent='VOLVER A EMPEZAR ESTA ACTIVIDAD';reset.addEventListener('click',()=>{clearState(state);render()});actions.appendChild(reset);
+ if(kind==='a'){const back=document.createElement('button');back.type='button';back.className='secondary back-example';back.textContent='👀 VOLVER AL EJEMPLO';back.addEventListener('click',()=>q('#step2').scrollIntoView({behavior:'smooth',block:'start'}));actions.appendChild(back)}
+ card.appendChild(actions);return card;
+}
+function renderList(id,tasks,current,store,kind){
+ const box=q(id);box.innerHTML='';
+ tasks.forEach((task,i)=>{if(i>current)return;if(task.bridge&&S.fast)return;if(!store[i])store[i]={};box.appendChild(taskCard(task,store[i],i<current,i,kind))})
+}
+function renderLearn(){
+ q('#learn').innerHTML=cfg().learn.map(x=>'<div class="example route-text">'+(x.visual?renderVisual(x.visual):'')+'<div><b>'+x.title+'</b><br>'+x.text+'</div></div>').join('');
+ if(!S.ls[0])S.ls[0]={};q('#learnCheck').innerHTML='';q('#learnCheck').appendChild(taskCard(cfg().learnCheck,S.ls[0],S.stars>=2,0,'l'));
+}
+function renderMeta(){
+ const c=cfg(),box=q('#meta');box.innerHTML='<div class="bold route-text" style="margin-bottom:10px">TOCÁ LO QUE HICISTE:</div>';S.meta=new Set();
+ const g=document.createElement('div');g.className='meta-grid';
+ c.meta.forEach(([ic,tx],i)=>{const b=document.createElement('button');b.type='button';b.className='meta-btn';b.setAttribute('aria-pressed','false');b.innerHTML='<span class="big">'+ic+'</span><span class="route-text">'+tx+'</span>';b.addEventListener('click',()=>{if(S.meta.has(i))S.meta.delete(i);else S.meta.add(i);b.setAttribute('aria-pressed',String(S.meta.has(i)))});g.appendChild(b)});box.appendChild(g);
+ const h=document.createElement('div');h.className='bold route-text';h.style.marginTop='16px';h.textContent='¿CUÁNTA AYUDA NECESITÉ?';box.appendChild(h);
+ const r=document.createElement('div');r.className='help-row';[['solo','😊','LO HICE SOLO/A'],['poco','🙂','NECESITÉ UN POCO'],['mucho','🤝','NECESITÉ BASTANTE AYUDA']].forEach(([v,ic,tx])=>{const b=document.createElement('button');b.type='button';b.className='secondary help-btn route-text';b.setAttribute('aria-pressed','false');b.textContent=ic+' '+tx;b.addEventListener('click',()=>{S.help=v;qa('.help-btn').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))});r.appendChild(b)});box.appendChild(r);
+}
+function finish(){
+ if(S.meta.size<3||!S.help){q('#final').textContent='COMPLETÁ AL MENOS TRES ESTRATEGIAS Y ELEGÍ CUÁNTA AYUDA NECESITASTE.';return}
+ setStars(4);q('#final').innerHTML='<div class="bold" style="font-size:22px">⭐⭐⭐⭐ ¡CUATRO ESTRELLAS!</div><div class="bold route-text" style="margin-top:10px">PARA HACERLO OTRA VEZ:</div>'+cfg().final.map((x,i)=>'<div class="route-text"><b>'+(i+1)+'.</b> '+x+'</div>').join('')+'<div class="bold route-text" style="font-size:20px;margin-top:10px">🏆 ¡TERMINASTE TU RUTA!</div>';
+}
+function render(){
+ routeCase(); renderList('#practice',cfg().practice,S.pi,S.ps,'p'); if(S.stars>=1)renderLearn(); renderList('#activity',cfg().activity,S.ai,S.as,'a');
+}
+function resetAll(){
+ S.pi=0;S.ai=0;S.ps={};S.as={};S.ls={};S.stars=0;S.help=null;S.meta=new Set();S.fast=true;
+ q('#goal').textContent=cfg().goal;q('#step2').classList.add('hidden');q('#step3').classList.add('hidden');q('#step4').classList.add('hidden');q('#final').textContent='';setStars(0);render();
+}
+q('#student').addEventListener('change',e=>{S.student=e.target.value;resetAll()});
+q('#reset').addEventListener('click',resetAll);q('#finish').addEventListener('click',finish);
+window.routeApp={getState:()=>JSON.parse(JSON.stringify({student:S.student,pi:S.pi,ai:S.ai,stars:S.stars,fast:S.fast})),reset:resetAll};
+resetAll();
+
+})();</script></body></html>
